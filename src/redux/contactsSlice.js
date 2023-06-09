@@ -23,3 +23,21 @@ export const contactsSlice = createSlice({
 export const { add, remove } = contactsSlice.actions;
 
 export default contactsSlice.reducer;
+
+// import { createSlice, nanoid } from '@reduxjs/toolkit';
+
+// const todosSlice = createSlice({
+//   name: 'todos',
+//   initialState: [],
+//   reducers: {
+//     addTodo: {
+//       reducer: (state, action) => {
+//         state.push(action.payload);
+//       },
+//       prepare: text => {
+//         const id = nanoid();
+//         return { payload: { id, text } };
+//       },
+//     },
+//   },
+// });
