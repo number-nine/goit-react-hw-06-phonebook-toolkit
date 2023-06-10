@@ -1,22 +1,32 @@
-import PropTypes from 'prop-types';
-import { FilterWrapper } from './Filter.styled';
-import { Button } from '../common.styled';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Filter = ({ filter, onChange, onReset }) => {
+import { update } from 'redux/filterSlice';
+import { Button } from '../common.styled';
+import { FilterWrapper } from './Filter.styled';
+
+const Filter = () => {
+  const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
   return (
     <FilterWrapper>
-      <input type="text" name="filter" value={filter} onChange={onChange} />
-      <Button type="button" onClick={onReset}>
+      <input
+        type="text"
+        name="filter"
+        value={filter}
+        onChange={e => {
+          dispatch(update(e.target.value));
+        }}
+      />
+      <Button
+        type="button"
+        onClick={() => {
+          dispatch(update(''));
+        }}
+      >
         Clear field
       </Button>
     </FilterWrapper>
   );
-};
-
-Filter.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
 };
 
 export default Filter;
