@@ -23,20 +23,22 @@ const ContactsList = () => {
     <ListWrapper>
       {visibleContacts.map(({ id, name, number, isPrivate }) => {
         return (
-          <li key={id}>
-            {name}: {number}{' '}
-            {isLoggedIn &&
-              (isPrivate ? (
-                <PrivateContact>private</PrivateContact>
-              ) : (
-                <SharedContact>shared</SharedContact>
-              ))}
-            {isLoggedIn && (
-              <Button type="button" onClick={() => dispatch(remove(id))}>
-                Delete
-              </Button>
-            )}
-          </li>
+          (!isPrivate || isLoggedIn) && (
+            <li key={id}>
+              {name}: {number}
+              {isLoggedIn &&
+                (isPrivate ? (
+                  <PrivateContact>private</PrivateContact>
+                ) : (
+                  <SharedContact>shared</SharedContact>
+                ))}
+              {isLoggedIn && (
+                <Button type="button" onClick={() => dispatch(remove(id))}>
+                  Delete
+                </Button>
+              )}
+            </li>
+          )
         );
       })}
     </ListWrapper>
