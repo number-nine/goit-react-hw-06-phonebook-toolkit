@@ -1,11 +1,12 @@
 import Section from 'components/Section';
 
+import { Container } from 'pages/Pages.styled';
 
 export default function Dashboard() {
   return (
-    <main>
+    <Container>
       <Section title="Dashboard"></Section>
-
-    </main>
+      Here can be some statistics or edit form
+    </Container>
   );
 }

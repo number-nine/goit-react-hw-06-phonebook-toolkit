@@ -3,10 +3,8 @@ import { createSlice, nanoid } from '@reduxjs/toolkit';
 import contacts from 'controllers/local-data-provider';
 import { addReducer, removeReducer } from './contactsReducers';
 
-const setInitialState = () =>
+const initialState = () =>
   contacts.map(contact => ({ ...contact, id: nanoid() }));
-
-const initialState = setInitialState();
 
 export const contactsSlice = createSlice({
   name: 'contacts',
@@ -15,8 +13,16 @@ export const contactsSlice = createSlice({
     add: {
       reducer: addReducer,
       prepare: contact => {
-      return {payload: {...contact, id: nanoid()}}
-    }
+        const { name, number } = contact;
+        return {
+          payload: {
+            ...contact,
+            name: name.trim(),
+            number: number.trim(),
+            id: nanoid(),
+          },
+        };
+      },
     },
     remove: removeReducer,
   },

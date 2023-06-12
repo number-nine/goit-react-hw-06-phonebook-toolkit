@@ -11,8 +11,30 @@ export const ListWrapper = styled.ul`
     display: flex;
     align-items: center;
     button {
-        margin-left: auto;
-        margin-right: 0;
+      margin-left: auto;
+      margin-right: 0;
     }
   }
+`;
+
+export const PrivateContact = styled.span`
+  position: relative;
+  top: -0.4rem;
+  left: 0.25rem;
+  padding: 2px;
+  color: #ffffff;
+  background-color: #eb643a;
+  font-size: 0.75rem;
+  border-radius: 0.2rem;
+`;
+
+export const SharedContact = styled.span`
+  position: relative;
+  top: -0.4rem;
+  left: 0.25rem;
+  padding: 2px;
+  color: #ffffff;
+  background-color: #15cc0e;
+  font-size: 0.75rem;
+  border-radius: 0.2rem;
 `;
