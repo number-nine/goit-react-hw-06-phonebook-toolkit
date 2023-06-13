@@ -13,8 +13,10 @@ const ContactsList = () => {
   const filter = useSelector(state => state.filter);
   const { isLoggedIn } = useSelector(state => state.auth);
 
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.trim().toLowerCase())
+  const visibleContacts = contacts.filter(
+    contact =>
+      contact.name.toLowerCase().includes(filter.trim().toLowerCase()) &&
+      (!contact.isPrivate || isLoggedIn)
   );
   const dispatch = useDispatch();
   return visibleContacts.length === 0 ? (
@@ -23,22 +25,20 @@ const ContactsList = () => {
     <ListWrapper>
       {visibleContacts.map(({ id, name, number, isPrivate }) => {
         return (
-          (!isPrivate || isLoggedIn) && (
-            <li key={id}>
-              {name}: {number}
-              {isLoggedIn &&
-                (isPrivate ? (
-                  <PrivateContact>private</PrivateContact>
-                ) : (
-                  <SharedContact>shared</SharedContact>
-                ))}
-              {isLoggedIn && (
-                <Button type="button" onClick={() => dispatch(remove(id))}>
-                  Delete
-                </Button>
-              )}
-            </li>
-          )
+          <li key={id}>
+            {name}: {number}
+            {isLoggedIn &&
+              (isPrivate ? (
+                <PrivateContact>private</PrivateContact>
+              ) : (
+                <SharedContact>shared</SharedContact>
+              ))}
+            {isLoggedIn && (
+              <Button type="button" onClick={() => dispatch(remove(id))}>
+                Delete
+              </Button>
+            )}
+          </li>
         );
       })}
     </ListWrapper>
